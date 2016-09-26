@@ -11,3 +11,4 @@ import scrapy
 class CarItem(scrapy.Item):
     id = scrapy.Field()
     url = scrapy.Field()
+    seen = scrapy.Field()
