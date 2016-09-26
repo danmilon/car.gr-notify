@@ -6,24 +6,11 @@
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
 import os
-import smtplib
 import csv
 import copy
 
-
-#server = smtplib.SMTP_SSL("smtp.gmail.com", port=465)
-#server.login(os.getenv('MAIL_USERNAME'), os.getenv('MAIL_PASSWORD'))
-
-def sendmail(item):
-    msg = """From: i@danmilon.me
-To: i@danmilon.me
-Subject: check out car ad {id}
-
-{url}
-""".format(id=item['id'], url=item['url'])
-    server.sendmail('i@danmilon.me', ['i@danmilon.me'], msg)
-
 CUR_DIR = os.path.dirname(os.path.realpath(__file__))
+
 
 class PersistencePipeline(object):
     CSV_PATH = os.path.join(CUR_DIR, '..', 'cars.csv')
@@ -64,6 +51,3 @@ class PersistencePipeline(object):
 
         if existing_ad and existing_ad != ad:
             ad['seen'] = 'no'
-
-        if not os.getenv('NOMAIL'):
-            sendmail(item)
